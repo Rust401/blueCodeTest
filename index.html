@@ -1,7 +1,6 @@
 <!DOCTYPE html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
     <title>浙江大学通行码</title>
     <meta
       name="viewport"
@@ -13,6 +12,17 @@
       type="text/javascript"
       src="./resources/js/jquery.qrcode.min.js"
     ></script>
+    <script>
+        function changeName(){
+            let name=document.getElementById("nameInput").value;
+            document.getElementById("dude").innerHTML=name+"的通行码";
+            let stdType=document.getElementById("stuTypeInput").value;
+            document.getElementById("studentType").innerHTML=stdType;
+            let idObject = document.getElementById('muteDiv');
+            if (idObject != null)
+            idObject.parentNode.removeChild(idObject);
+        }
+    </script>
     <script>
       jQuery(function() {
         var colour = "1E90FF";
@@ -129,12 +139,21 @@
   </head>
 
   <body class="blue-bg">
+      <div id="muteDiv">
+          <label for="name">Name:</label>
+          <input name="name" type="text" id="nameInput">
+          <select name="stuTypeInput" id="stuTypeInput">
+            <option value="本科生">本科生</option>
+            <option value="研究生" selected>研究生</option>
+          </select>
+          <input type="button" onclick="changeName()" value="Input">
+      </div>
     <div class="banner"><img src="./resources/img/text.png" /></div>
     <div class="content-box">
       <div class="top-title">
-        <h3>卢晓宇的通行码</h3>
+        <h3 id="dude">卢晓宇的通行码</h3>
 
-        <span class="bgr">本科生</span>
+        <span class="bgr" id="studentType">本科生</span>
       </div>
 
       <strong
