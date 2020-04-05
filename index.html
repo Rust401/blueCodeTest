@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>浙江大学通行码</title>
@@ -13,18 +13,45 @@
       src="./resources/js/jquery.qrcode.min.js"
     ></script>
     <script>
-        function changeName(){
-            let name=document.getElementById("nameInput").value;
-            document.getElementById("dude").innerHTML=name+"的通行码";
-            let stdType=document.getElementById("stuTypeInput").value;
-            document.getElementById("studentType").innerHTML=stdType;
-            let idObject = document.getElementById('muteDiv');
-            if (idObject != null)
-            idObject.parentNode.removeChild(idObject);
-        }
+      function changeName() {
+        let name = document.getElementById("nameInput").value;
+        document.getElementById("dude").innerHTML = name + "的通行码";
+        let stdType = document.getElementById("stuTypeInput").value;
+        document.getElementById("studentType").innerHTML = stdType;
+        let idObject = document.getElementById("muteDiv");
+        if (idObject != null) idObject.parentNode.removeChild(idObject);
+      }
     </script>
     <script>
-      jQuery(function() {
+      function synTime() {
+        nowtime = new Date();
+        year = nowtime.getFullYear(); //年
+        month = nowtime.getMonth() + 1; //月
+        day = nowtime.getDate(); //日
+        if (nowtime.getHours() > 2) {
+          hour = nowtime.getHours() - 1;
+        } else {
+          hour = nowtime.getHours();
+        }
+        minutes = parseInt(nowtime.getMinutes() / 2); //分
+        seconds = parseInt(nowtime.getSeconds() / 3); //秒
+        document.getElementById("syncTime").innerText =
+          "同步时间：" +
+          p(year) +
+          "-" +
+          p(month) +
+          "-" +
+          p(day) +
+          " " +
+          p(hour) +
+          ":" +
+          p(minutes) +
+          ":" +
+          p(seconds);
+      }
+    </script>
+    <script>
+      jQuery(function () {
         var colour = "1E90FF";
         var flag = "";
         if (null == colour || "" == colour) {
@@ -77,7 +104,6 @@
           );
         }
 
-        var account = "21714069";
         jQuery("#output").qrcode({
           render: "table",
           width: 180,
@@ -86,7 +112,7 @@
           text: "zpy002gtKP4uzN+v7CW8OvADDTF8q3bY",
           render: "canvas", //也可以替换为table
           foreground: "#" + colour,
-          background: "#FFF"
+          background: "#FFF",
         });
       });
 
@@ -95,12 +121,12 @@
         $.ajax({
           type: "GET",
           url:
-            "/pass_code/jkm?account=21714069&cardNo=330282199411070031&identity=3",
+            "/pass_code/jkm?account=21900000&cardNo=330111199912310000&identity=3",
           async: false,
           dataType: "json",
-          success: function(data) {
+          success: function (data) {
             datas = data;
-          }
+          },
         });
         return datas;
       }
@@ -129,6 +155,7 @@
             ":" +
             p(seconds);
         }
+
         setInterval("showTime()", 1000);
         //月日时分秒小于10补0
         function p(s) {
@@ -138,16 +165,16 @@
     </script>
   </head>
 
-  <body class="blue-bg">
-      <div id="muteDiv">
-          <label for="name">Name:</label>
-          <input name="name" type="text" id="nameInput">
-          <select name="stuTypeInput" id="stuTypeInput">
-            <option value="本科生">本科生</option>
-            <option value="研究生" selected>研究生</option>
-          </select>
-          <input type="button" onclick="changeName()" value="Input">
-      </div>
+  <body class="blue-bg" onload="synTime()">
+    <div id="muteDiv">
+      <label for="name">Name:</label>
+      <input name="name" type="text" id="nameInput" />
+      <select name="stuTypeInput" id="stuTypeInput">
+        <option value="本科生">本科生</option>
+        <option value="研究生" selected>研究生</option>
+      </select>
+      <input type="button" onclick="changeName()" value="Input" />
+    </div>
     <div class="banner"><img src="./resources/img/text.png" /></div>
     <div class="content-box">
       <div class="top-title">
@@ -163,26 +190,24 @@
       >
 
       <div class="qr">
-        <div id="output" style="margin-top: 10px;margin-bottom: 10px">
-          
-        </div>
+        <div id="output" style="margin-top: 10px; margin-bottom: 10px;"></div>
       </div>
 
       <div class="time">有效期：2020-03-30 - 2020-04-30</div>
 
       <div id="hzjkm">
-        <div class="hz" style="color: #55b957">健康码为 绿码</div>
+        <div class="hz" style="color: #55b957;">健康码为 绿码</div>
       </div>
 
       <div id="dateTime">
-        <div class="time">同步时间：2020-04-02 15:37:12</div>
+        <div class="time" id="syncTime">同步时间：2020-04-02 15:37:12</div>
       </div>
 
       <p class="tip" style="margin-top: 10px;">
         凭此码可在浙江大学校园内通行<br />请主动出示，配合检查
       </p>
 
-      <div style="text-align:center; margin-top: 10px">
+      <div style="text-align: center; margin-top: 10px;">
         <a target="_blank" href="http://one.zju.edu.cn/taskcenter/wechat/index"
           >办事大厅</a
         >&nbsp;&nbsp;&nbsp;
