@@ -22,34 +22,7 @@
         if (idObject != null) idObject.parentNode.removeChild(idObject);
       }
     </script>
-    <script>
-      function synTime() {
-        nowtime = new Date();
-        year = nowtime.getFullYear(); //年
-        month = nowtime.getMonth() + 1; //月
-        day = nowtime.getDate(); //日
-        if (nowtime.getHours() > 2) {
-          hour = nowtime.getHours() - 1;
-        } else {
-          hour = nowtime.getHours();
-        }
-        minutes = parseInt(nowtime.getMinutes() / 2); //分
-        seconds = parseInt(nowtime.getSeconds() / 3); //秒
-        document.getElementById("syncTime").innerText =
-          "同步时间：" +
-          p(year) +
-          "-" +
-          p(month) +
-          "-" +
-          p(day) +
-          " " +
-          p(hour) +
-          ":" +
-          p(minutes) +
-          ":" +
-          p(seconds);
-      }
-    </script>
+
     <script>
       jQuery(function () {
         var colour = "1E90FF";
@@ -165,7 +138,7 @@
     </script>
   </head>
 
-  <body class="blue-bg" onload="synTime()">
+  <body class="blue-bg">
     <div id="muteDiv">
       <label for="name">Name:</label>
       <input name="name" type="text" id="nameInput" />
@@ -200,7 +173,9 @@
       </div>
 
       <div id="dateTime">
-        <div class="time" id="syncTime">同步时间：2020-04-02 15:37:12</div>
+        <div class="time" id="syncTime">
+          同步时间：2020-04-02 15:37:12
+        </div>
       </div>
 
       <p class="tip" style="margin-top: 10px;">
@@ -226,5 +201,34 @@
       >
       <h3>技术支持：0571-87951669</h3>
     </div>
+    <script>
+      function synTime() {
+        nowtime = new Date();
+        year = nowtime.getFullYear(); //年
+        month = nowtime.getMonth() + 1; //月
+        day = nowtime.getDate(); //日
+        if (nowtime.getHours() > 2) {
+          hour = nowtime.getHours() - 1;
+        } else {
+          hour = nowtime.getHours();
+        }
+        minutes = parseInt(nowtime.getMinutes() / 2); //分
+        seconds = parseInt(nowtime.getSeconds() / 3); //秒
+        document.getElementById("syncTime").innerText =
+          "同步时间：" +
+          p(year) +
+          "-" +
+          p(month) +
+          "-" +
+          p(day) +
+          " " +
+          p(hour) +
+          ":" +
+          p(minutes) +
+          ":" +
+          p(seconds);
+      }
+      synTime();
+    </script>
   </body>
 </html>
